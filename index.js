@@ -54,17 +54,20 @@ let db = firebase.database().ref('key');
         console.log(data.val());
         rooms = data.val();
     });
+    db.on('child_changed', function(data) {
+        console.log(data.val());
+        rooms = data.val();
+    });
 exitBnt.addEventListener('click',()=>{
     firebase.database().ref('key').remove()
     window.location.reload()
 })
 join.addEventListener('click',()=>{
-    if(rooms.length > 0){
-        const pptConverter = whiteWebSdk.pptConverter(`${rooms[1].roomToken}`);
+    if(rooms !== undefined){
+        const pptConverter = whiteWebSdk.pptConverter(`${rooms.roomToken}`);
         whiteWebSdk.joinRoom({
-            uuid: rooms[1].room.uuid,
-            roomToken: rooms[1].roomToken,
-            isWritable: teacher
+            uuid: rooms.room.uuid,
+            roomToken: rooms.roomToken,
         }).then(function(room) {
             // Bind the room instance to a global variable. All subsequent API instances will directly call room
             window.room = room;
