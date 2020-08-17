@@ -1,0 +1,14 @@
+.top{
+
+}
+.row-video{
+  display: flex;
+  flex-direction: column;
+}
+.row-video div{
+  width: 400px;
+  height: 200px;
+}
+.boder{
+  border: 1px solid black;
+}
