@@ -23,7 +23,7 @@ var firebaseConfig = {
     appId: "1:922317285890:web:fbac59705c66cf64a7551b"
   };
   firebase.initializeApp(firebaseConfig);
-let rooms = []
+let rooms = null;
 let eraser = document.getElementById('eraser')
 let join = document.getElementById('join')
 let pencil = document.getElementById('pencil')
@@ -52,7 +52,7 @@ createRoomBnt.addEventListener('click',(e)=>{
 let db = firebase.database().ref('key');
     db.on('child_added', function(data) {
         console.log(data.val());
-        rooms.push(data.val())
+        rooms = data.val();
     });
 exitBnt.addEventListener('click',()=>{
     firebase.database().ref('key').remove()
